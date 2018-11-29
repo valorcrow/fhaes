@@ -1,0 +1,45 @@
+========================================================================================================================
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+========================================================================================================================
+
+Plain Text Unified Format Version 3.0.2
+
+NAME: how-to-use-branch-update-scripts.txt
+AUTHOR(S): Joshua Thomas Brogan
+
+PURPOSE: This file describes the process for using branch update scripts.
+
+========================================================================================================================
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+========================================================================================================================
+
+
+========================================================================================================================
+PREFACE:
+------------------------------------------------------------------------------------------------------------------------
+The following script(s) have been created to assist developers in performing branch updates:
+
+1) update-all-local-git-branches.sh
+2) update-local-master-from-upstream.sh
+
+Feel free to utilize these script(s) for the branch update process as they will help ensure that your workspace remains
+clean and up-to-date.
+
+
+========================================================================================================================
+TUTORIAL:
+------------------------------------------------------------------------------------------------------------------------
+The process for executing updates using a branch update script is detailed in the following text:
+
+In this tutorial I will assume that your workspace is configured for use with "Git Bash for Windows". If you need to
+execute branch updates for any branch which is not available in the script then you will need to do so manually.
+
+How to update your local Git branches using a branch update script:
+
+1) Verify that the Git Bash console is pointing to the same directory as the script file.
+2) In Git Bash, type "./update-all-local-git-branches.sh" and press the "enter" key.
+3) Wait for the script to finish executing and verify that no errors occurred during the execution.
+
+
+========================================================================================================================
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

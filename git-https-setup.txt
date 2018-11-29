@@ -1,0 +1,5 @@
+git clone https://github.com/valorcrow/fhaes.git
+cd fhaes/
+git remote add upstream https://github.com/petebrew/fhaes.git
+git fetch upstream
+git remote show

@@ -6,7 +6,7 @@
 #  NAME: ~fetch-all-remotes-and-pull-release-branches.sh
 #  AUTHOR(S): Joshua Thomas Brogan (JTBROGAN)
 #
-#  PURPOSE: Use this Bash Script to pull the latest code for all local Git branches in the repository.
+#  PURPOSE: This script will fetch all remotes and pull the latest code for all release branches.
 #
 #=======================================================================================================================
 #///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -76,7 +76,7 @@ echo -e "${FG_D_WHITE}==========================================================
 echo -e ""
 echo -e "${FG_L_WHITE}NAME${FG_D_WHITE} -------> ${FG_L_GREEN}~fetch-all-remotes-and-pull-release-branches.sh${DEFAULT_BG_FG}"
 echo -e "${FG_L_WHITE}AUTHOR(S)${FG_D_WHITE} --> ${DEFAULT_BG_FG}Joshua Thomas Brogan (JTBROGAN)"
-echo -e "${FG_L_WHITE}PURPOSE${FG_D_WHITE} ----> ${DEFAULT_BG_FG}This Bash Script will pull the latest code for all local Git branches in the repository."
+echo -e "${FG_L_WHITE}PURPOSE${FG_D_WHITE} ----> ${DEFAULT_BG_FG}This script will fetch all remotes and pull the latest code for all release branches."
 echo -e ""
 echo -e "${FG_D_WHITE}====================================================================================================${DEFAULT_BG_FG}"
 echo -e "${FILE_HEADER_BG_FG}////////////////////////////////////////////////////////////////////////////////////////////////////${DEFAULT_BG_FG}"

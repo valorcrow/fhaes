@@ -19,7 +19,8 @@ PREFACE:
 ------------------------------------------------------------------------------------------------------------------------
 The following script(s) have been created to assist developers in performing automated Git operations:
 
-1) ~fetch-all-remotes-and-pull-release-branches.sh
+1) ~fetch-all-remotes-and-pull-current-branch.sh
+2) ~fetch-all-remotes-and-pull-release-branches.sh
 
 Feel free to utilize these script(s) for the branch update process as they will help ensure that your workspace remains
 clean and up-to-date.

@@ -3,7 +3,7 @@
 #\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 #=======================================================================================================================
 #
-#  NAME: ~fetch-all-remotes-and-pull-release-branches.sh
+#  NAME: ~fetch-all-remotes-and-pull-current-branch.sh
 #  AUTHOR(S): Joshua Thomas Brogan (JTBROGAN)
 #
 #  PURPOSE: This script will fetch all remotes and pull the latest code for all release branches.
@@ -65,7 +65,7 @@ currentBranch=$(git symbolic-ref -q HEAD)
 currentBranch=${currentBranch##refs/heads/}
 currentBranch=${currentBranch:-HEAD}
 declare -a gitRemotesToFetch=("origin" "upstream")
-declare -a gitBranchesToPull=("master")
+declare -a gitBranchesToPull=("${currentBranch}")
 
 #===================================================================================================
 #\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
@@ -77,7 +77,7 @@ echo -e "${FG_L_WHITE}==========================================================
 echo -e "${FILE_HEADER_BG_FG}\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\${DEFAULT_BG_FG}"
 echo -e "${FG_D_WHITE}====================================================================================================${DEFAULT_BG_FG}"
 echo -e ""
-echo -e "${FG_L_WHITE}NAME${FG_D_WHITE} -------> ${FG_L_GREEN}~fetch-all-remotes-and-pull-release-branches.sh${DEFAULT_BG_FG}"
+echo -e "${FG_L_WHITE}NAME${FG_D_WHITE} -------> ${FG_L_GREEN}~fetch-all-remotes-and-pull-current-branch.sh${DEFAULT_BG_FG}"
 echo -e "${FG_L_WHITE}AUTHOR(S)${FG_D_WHITE} --> ${DEFAULT_BG_FG}Joshua Thomas Brogan (JTBROGAN)"
 echo -e "${FG_L_WHITE}PURPOSE${FG_D_WHITE} ----> ${DEFAULT_BG_FG}This script will fetch all remotes and pull the latest code for all release branches."
 echo -e ""

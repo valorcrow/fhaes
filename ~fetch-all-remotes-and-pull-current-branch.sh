@@ -6,7 +6,7 @@
 #  NAME: ~fetch-all-remotes-and-pull-current-branch.sh
 #  AUTHOR(S): Joshua Brogan (JTB023) and Katamdora Balusu (KXB092)
 #
-#  PURPOSE: This script will fetch all remotes and pull the latest code for all release branches.
+#  PURPOSE: This script will fetch all remotes and pull the latest code for the current branch.
 #
 #=======================================================================================================================
 #///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -79,7 +79,7 @@ echo -e "${FG_D_WHITE}==========================================================
 echo -e ""
 echo -e "${FG_L_WHITE}NAME${FG_D_WHITE} -------> ${FG_L_GREEN}~fetch-all-remotes-and-pull-current-branch.sh${DEFAULT_BG_FG}"
 echo -e "${FG_L_WHITE}AUTHOR(S)${FG_D_WHITE} --> ${DEFAULT_BG_FG}Joshua Brogan (JTB023) and Katamdora Balusu (KXB092)"
-echo -e "${FG_L_WHITE}PURPOSE${FG_D_WHITE} ----> ${DEFAULT_BG_FG}This script will fetch all remotes and pull the latest code for all release branches."
+echo -e "${FG_L_WHITE}PURPOSE${FG_D_WHITE} ----> ${DEFAULT_BG_FG}This script will fetch all remotes and pull the latest code for the current branch."
 echo -e ""
 echo -e "${FG_D_WHITE}====================================================================================================${DEFAULT_BG_FG}"
 echo -e "${FILE_HEADER_BG_FG}////////////////////////////////////////////////////////////////////////////////////////////////////${DEFAULT_BG_FG}"

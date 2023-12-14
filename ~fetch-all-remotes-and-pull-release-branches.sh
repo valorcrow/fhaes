@@ -66,7 +66,7 @@ currentBranch=$(git symbolic-ref -q HEAD)
 currentBranch=${currentBranch##refs/heads/}
 currentBranch=${currentBranch:-HEAD}
 declare -a gitRemotesToFetch=("origin")
-declare -a gitBranchesToPull=("master" "develop")
+declare -a gitBranchesToPull=("master")
 
 #===================================================================================================
 #\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\

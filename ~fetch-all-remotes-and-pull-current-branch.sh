@@ -18,7 +18,7 @@
 #===================================================================================================
 #\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 #===================================================================================================
-# SETUP: Declare color constants, color styles, and script variables
+# DATA SETUP: Declare color constants, color styles, and script variables
 
 # Declare color constants
 # Background(BG)/Foreground(FG) Defaults
@@ -59,18 +59,19 @@ FG_L_WHITE='\e[0;97m';   FG_LB_WHITE='\e[1;97m';   FG_LD_WHITE='\e[2;97m';   FG_
 DEFAULT_BG_FG="${BG_DEFAULT}${FG_DEFAULT}"
 FILE_HEADER_BG_FG="${BG_L_BLACK}${FG_LD_WHITE}"
 STAGE_HEADER_BG_FG="${BG_L_BLACK}${FG_B_WHITE}"
+STAGE_NUMBER_BG_FG="${BG_L_BLACK}${FG_LB_RED}"
 
 # Declare script variables
 currentBranch=$(git symbolic-ref -q HEAD)
 currentBranch=${currentBranch##refs/heads/}
 currentBranch=${currentBranch:-HEAD}
-declare -a gitRemotesToFetch=("origin" "upstream")
+declare -a gitRemotesToFetch=("origin")
 declare -a gitBranchesToPull=("${currentBranch}")
 
 #===================================================================================================
 #\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 #===================================================================================================
-# STAGE 01: Display the informational header block
+# BEGIN SCRIPT: Display the informational header block
 
 echo -e ""
 echo -e "${FG_L_WHITE}====================================================================================================${DEFAULT_BG_FG}"
@@ -88,11 +89,24 @@ echo -e "${FG_L_WHITE}==========================================================
 #===================================================================================================
 #\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 #===================================================================================================
+# STAGE 01: Set the global Git variable configs to their standard project values
+
+echo -e ""
+echo -e "${FG_D_WHITE}====================================================================================================${DEFAULT_BG_FG}"
+echo -e "${STAGE_HEADER_BG_FG}## ${STAGE_NUMBER_BG_FG}(1/8)${STAGE_HEADER_BG_FG} Setting the global Git variable configs to their standard project values ...               ${DEFAULT_BG_FG}"
+echo -e "${FG_D_WHITE}====================================================================================================${DEFAULT_BG_FG}"
+echo -e ""
+echo -e "${FG_L_CYAN}*** INFO ***${FG_L_WHITE} Executing command {${FG_L_YELLOW}git config --global pull.rebase true${FG_L_WHITE}}${DEFAULT_BG_FG}"
+git config --global pull.rebase true
+
+#===================================================================================================
+#\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+#===================================================================================================
 # STAGE 02: Verify that the current branch does not have any modified files
 
 echo -e ""
 echo -e "${FG_D_WHITE}====================================================================================================${DEFAULT_BG_FG}"
-echo -e "${STAGE_HEADER_BG_FG}Verifying that the current branch does not have any modified files...                               ${DEFAULT_BG_FG}"
+echo -e "${STAGE_HEADER_BG_FG}## ${STAGE_NUMBER_BG_FG}(2/8)${STAGE_HEADER_BG_FG} Verifying that the current branch does not have any modified files ...                     ${DEFAULT_BG_FG}"
 echo -e "${FG_D_WHITE}====================================================================================================${DEFAULT_BG_FG}"
 echo -e ""
 git status
@@ -102,7 +116,7 @@ if [[ $? != 0 ]]; then
     echo -e "${FG_L_RED}*** ERROR ***${FG_L_WHITE} File verification command did not execute successfully.${DEFAULT_BG_FG}"
     echo -e ""
     echo -e "${FG_D_WHITE}====================================================================================================${DEFAULT_BG_FG}"
-    echo -e "${STAGE_HEADER_BG_FG}No branch updates were performed.                                                                   ${DEFAULT_BG_FG}"
+    echo -e "${STAGE_HEADER_BG_FG}## ${STAGE_NUMBER_BG_FG}(RESULT)${STAGE_HEADER_BG_FG} No branch updates were performed!                                                       ${DEFAULT_BG_FG}"
     echo -e "${FG_D_WHITE}====================================================================================================${DEFAULT_BG_FG}"
     echo -e ""
     exit 1
@@ -110,7 +124,7 @@ elif [[ $files ]]; then
     echo -e "${FG_L_RED}*** ERROR ***${FG_L_WHITE} Please commit or revert the modified files and try running the script again.${DEFAULT_BG_FG}"
     echo -e ""
     echo -e "${FG_D_WHITE}====================================================================================================${DEFAULT_BG_FG}"
-    echo -e "${STAGE_HEADER_BG_FG}No branch updates were performed.                                                                   ${DEFAULT_BG_FG}"
+    echo -e "${STAGE_HEADER_BG_FG}## ${STAGE_NUMBER_BG_FG}(RESULT)${STAGE_HEADER_BG_FG} No branch updates were performed!                                                       ${DEFAULT_BG_FG}"
     echo -e "${FG_D_WHITE}====================================================================================================${DEFAULT_BG_FG}"
     echo -e ""
     exit 1
@@ -121,15 +135,15 @@ fi
 #===================================================================================================
 #\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 #===================================================================================================
-# STAGE 03: Fetch the latest refs and prune excess brances for each remote repository
+# STAGES 03/04: Fetch the latest refs and prune excess branches for each remote repository
 
 for remoteName in "${gitRemotesToFetch[@]}"
 do
     # Fetch the latest refs from the remote repository
     echo -e ""
     echo -e "${FG_D_WHITE}====================================================================================================${DEFAULT_BG_FG}"
-    printf "${STAGE_HEADER_BG_FG}"
-    printf "%-100s" "Fetching the latest refs from ${remoteName}..."
+    printf "${STAGE_HEADER_BG_FG}## ${STAGE_NUMBER_BG_FG}(3/8)${STAGE_HEADER_BG_FG}"
+    printf "%-92s" " Fetching the latest refs from \"${remoteName}\" ..."
     printf "${DEFAULT_BG_FG}\n"
     echo -e "${FG_D_WHITE}====================================================================================================${DEFAULT_BG_FG}"
     echo -e ""
@@ -139,8 +153,8 @@ do
     # Prune excess branches from the remote repository
     echo -e ""
     echo -e "${FG_D_WHITE}====================================================================================================${DEFAULT_BG_FG}"
-    printf "${STAGE_HEADER_BG_FG}"
-    printf "%-100s" "Pruning excess branches from ${remoteName}..."
+    printf "${STAGE_HEADER_BG_FG}## ${STAGE_NUMBER_BG_FG}(4/8)${STAGE_HEADER_BG_FG}"
+    printf "%-92s" " Pruning excess branches from \"${remoteName}\" ..."
     printf "${DEFAULT_BG_FG}\n"
     echo -e "${FG_D_WHITE}====================================================================================================${DEFAULT_BG_FG}"
     echo -e ""
@@ -151,14 +165,15 @@ done
 #===================================================================================================
 #\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 #===================================================================================================
-# STAGE 04: Pull the latest code changes for all necessary branches
+# STAGE 05: Pull the latest code changes for all necessary branches
 
+ITER=1
 for branchName in "${gitBranchesToPull[@]}"
 do
     echo -e ""
     echo -e "${FG_D_WHITE}====================================================================================================${DEFAULT_BG_FG}"
-    printf "${STAGE_HEADER_BG_FG}"
-    printf "%-100s" "Pulling the latest code changes for origin/${branchName}..."
+    printf "${STAGE_HEADER_BG_FG}## ${STAGE_NUMBER_BG_FG}(5-${ITER}/8)${STAGE_HEADER_BG_FG}"
+    printf "%-90s" " Pulling the latest code changes for \"origin/${branchName}\" ..."
     printf "${DEFAULT_BG_FG}\n"
     echo -e "${FG_D_WHITE}====================================================================================================${DEFAULT_BG_FG}"
     echo -e ""
@@ -170,16 +185,17 @@ do
     echo -e ""
     echo -e "${FG_L_CYAN}*** INFO ***${FG_L_WHITE} Executing command {${FG_L_YELLOW}git pull origin ${branchName}${FG_L_WHITE}}${DEFAULT_BG_FG}"
     git pull origin ${branchName}
+    ITER=$(expr $ITER + 1)
 done
 
 #===================================================================================================
 #\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 #===================================================================================================
-# STAGE 05: Perform garbage collection on the local repository
+# STAGE 06: Perform garbage collection on the local repository
 
 echo -e ""
 echo -e "${FG_D_WHITE}====================================================================================================${DEFAULT_BG_FG}"
-echo -e "${STAGE_HEADER_BG_FG}Performing garbage collection on the local repository...                                            ${DEFAULT_BG_FG}"
+echo -e "${STAGE_HEADER_BG_FG}## ${STAGE_NUMBER_BG_FG}(6/8)${STAGE_HEADER_BG_FG} Performing garbage collection on the local repository ...                                  ${DEFAULT_BG_FG}"
 echo -e "${FG_D_WHITE}====================================================================================================${DEFAULT_BG_FG}"
 echo -e ""
 echo -e "${FG_L_CYAN}*** INFO ***${FG_L_WHITE} Executing command {${FG_L_YELLOW}git gc${FG_L_WHITE}}${DEFAULT_BG_FG}"
@@ -188,11 +204,11 @@ git gc
 #===================================================================================================
 #\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 #===================================================================================================
-# STAGE 06: Show the latest refs from origin
+# STAGE 07: Show the latest Git refs for the remote "origin" repository
 
 echo -e ""
 echo -e "${FG_D_WHITE}====================================================================================================${DEFAULT_BG_FG}"
-echo -e "${STAGE_HEADER_BG_FG}Showing the latest refs from origin...                                                              ${DEFAULT_BG_FG}"
+echo -e "${STAGE_HEADER_BG_FG}## ${STAGE_NUMBER_BG_FG}(7/8)${STAGE_HEADER_BG_FG} Showing the latest Git refs for the remote \"origin\" repository ...                         ${DEFAULT_BG_FG}"
 echo -e "${FG_D_WHITE}====================================================================================================${DEFAULT_BG_FG}"
 echo -e ""
 echo -e "${FG_L_CYAN}*** INFO ***${FG_L_WHITE} Executing command {${FG_L_YELLOW}git remote show origin${FG_L_WHITE}}${DEFAULT_BG_FG}"
@@ -201,10 +217,23 @@ git remote show origin
 #===================================================================================================
 #\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 #===================================================================================================
-# STAGE 07: Notify the user that all branch updates were completed successfully
+# STAGE 08: Show the commit hashes for all local branches
 
 echo -e ""
 echo -e "${FG_D_WHITE}====================================================================================================${DEFAULT_BG_FG}"
-echo -e "${STAGE_HEADER_BG_FG}All branch updates were completed successfully.                                                     ${DEFAULT_BG_FG}"
+echo -e "${STAGE_HEADER_BG_FG}## ${STAGE_NUMBER_BG_FG}(8/8)${STAGE_HEADER_BG_FG} Showing the commit hashes for all local branches ...                                       ${DEFAULT_BG_FG}"
+echo -e "${FG_D_WHITE}====================================================================================================${DEFAULT_BG_FG}"
+echo -e ""
+echo -e "${FG_L_CYAN}*** INFO ***${FG_L_WHITE} Executing command {${FG_L_YELLOW}git branch -vv${FG_L_WHITE}}${DEFAULT_BG_FG}"
+git branch -vv
+
+#===================================================================================================
+#\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+#===================================================================================================
+# END SCRIPT: Notify the user that all Git variable configurations were completed successfully
+
+echo -e ""
+echo -e "${FG_D_WHITE}====================================================================================================${DEFAULT_BG_FG}"
+echo -e "${STAGE_HEADER_BG_FG}## ${STAGE_NUMBER_BG_FG}(RESULT)${STAGE_HEADER_BG_FG} All Git variable configurations were completed successfully!                            ${DEFAULT_BG_FG}"
 echo -e "${FG_D_WHITE}====================================================================================================${DEFAULT_BG_FG}"
 echo -e ""

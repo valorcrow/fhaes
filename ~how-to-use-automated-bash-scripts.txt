@@ -2,12 +2,10 @@
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 ========================================================================================================================
 
-Plain Text Unified Format Version 3.0.2
-
 NAME: ~how-to-use-automated-bash-scripts.txt
 AUTHOR(S): Joshua Brogan (JTB023) and Katamdora Balusu (KXB092)
 
-PURPOSE: This file describes the process for using automamted bash scripts.
+PURPOSE: This file describes the process for using automated bash scripts.
 
 ========================================================================================================================
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -21,6 +19,7 @@ The following script(s) have been created to assist developers in performing aut
 
 1) ~fetch-all-remotes-and-pull-current-branch.sh
 2) ~fetch-all-remotes-and-pull-release-branches.sh
+3) ~set-global-git-configs-to-standard-values.sh
 
 Feel free to utilize these script(s) for the branch update process as they will help ensure that your workspace remains
 clean and up-to-date.
@@ -37,7 +36,7 @@ execute branch updates for any branch which is not available in the script then 
 How to update your local Git branches using an automated bash script:
 
 1) Verify that the Git Bash terminal is pointing to the same directory as the script file.
-2) In Git Bash, type "./~fetch-all-remotes-and-pull-release-branches.sh" and press the "enter" key.
+2) In Git Bash, type "./~fetch-all-remotes-and-pull-current-branch.sh" and press the "enter" key.
 3) Wait for the script to complete, then verify that no errors occurred during its execution.
 
 
